@@ -6,12 +6,12 @@ class Base(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
 	date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-	date_updated = db.Column(db.DateTime, default=db.func.current_timestamp())
+	date_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), 
+		onupdate=db.func.current_timestamp())
 
-onupdate = db.func.current_timestamp()
 
 class User(Base):
-	__table__name = 'auth_user'
+	__tablename__ = 'auth_user'
 
 	username = db.Column(db.String(128), nullable=False)
 	email = db.Column(db.String(128), nullable=False, unique=True)

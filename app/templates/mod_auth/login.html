@@ -1,16 +1,8 @@
-{% macro render_field(field, placeholder=None) %}
-{% if field.errors %}
-<div>
-{% elif field.flags.error %}
-<div>
-{% else %}
-<div>
-{% endif %}
-	{% set css_class = 'form-control ' + kwargs.pop('class', '') %}
-	{{ field(class=css_class, placeholder=placeholder, **kwargs) }}
-</div>
-{% endmacro %}
+{% from 'mod_auth/macros.html' import render_field %}
 
+{% extends 'base.html' %}
+
+{% block content %}
 <div>
 	<div>
 		<legend>Login</legend>
@@ -26,14 +18,14 @@
 
 		{% if form.errors %}
 		<div>
-		{% for field, errr in form.errors.items() %}
+		{% for field, error in form.errors.items() %}
 			{% for e in error %}
 			{{ e }}<br>
 			{% endfor %}
 		{% endfor %}
 		</div>
 		{% endif %}
-		<form method="POST" action="." accept-charset="UTF-8" role="form">
+		<form method="POST" action="">
 			{{ form.csrf_token }}
 			{{ render_field(form.email, placeholder="Your Email Address", autofocus="") }}
 			{{ render_field(form.password, placeholder="Password") }}
@@ -48,3 +40,4 @@
 		</form>
 	</div>
 </div>
+{% endblock %}
