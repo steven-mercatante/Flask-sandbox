@@ -6,25 +6,26 @@
 <div>
 	<div>
 		<legend>Login</legend>
-		{% with errors = get_flashed_messages(category_filter=["error"]) %}
-		{% if errors %}
-		<div>
-			{% for error in errors %}
-			{{ error }}<br>
-			{% endfor %}
-		</div>
-		{% endif %}
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<ul class="flashes">
+				{% for category, message in messages %}
+				<li class="{{ category }}">{{ message }}<li>
+				{% endfor %}
+			</ul>
+			{% endif %}
 		{% endwith %}
 
 		{% if form.errors %}
-		<div>
+		<ul class="form-errors">
 		{% for field, error in form.errors.items() %}
 			{% for e in error %}
-			{{ e }}<br>
+			<li>{{ e }}</li>
 			{% endfor %}
 		{% endfor %}
-		</div>
+		</ul>
 		{% endif %}
+		
 		<form method="POST" action="">
 			{{ form.csrf_token }}
 			{{ macros.render_field(form.email, placeholder="Your Email Address", autofocus="") }}
