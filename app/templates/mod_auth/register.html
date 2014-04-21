@@ -1,4 +1,4 @@
-{% from 'mod_auth/macros.html' import render_field %}
+{% import 'mod_auth/macros.html' as macros %}
 
 {% extends 'base.html' %}
 
@@ -28,9 +28,9 @@
 
 		<form method="POST" action="">
 			{{ form.csrf_token }}
-			{{ render_field(form.email, placeholder="Your Email Address", autofocus="") }}
-			{{ render_field(form.password, placeholder="Password") }}
-			{{ render_field(form.confirm_password, placeholder="Confirm Password") }}
+			{{ macros.render_field(form.email, placeholder="Your Email Address", autofocus="") }}
+			{{ macros.render_field(form.password, placeholder="Password") }}
+			{{ macros.render_field(form.confirm_password, placeholder="Confirm Password") }}
 			<button type="submit" name="submit">Register</button>
 		</form>
 

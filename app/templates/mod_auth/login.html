@@ -1,4 +1,4 @@
-{% from 'mod_auth/macros.html' import render_field %}
+{% import 'mod_auth/macros.html' as macros %}
 
 {% extends 'base.html' %}
 
@@ -27,8 +27,8 @@
 		{% endif %}
 		<form method="POST" action="">
 			{{ form.csrf_token }}
-			{{ render_field(form.email, placeholder="Your Email Address", autofocus="") }}
-			{{ render_field(form.password, placeholder="Password") }}
+			{{ macros.render_field(form.email, placeholder="Your Email Address", autofocus="") }}
+			{{ macros.render_field(form.password, placeholder="Password") }}
 			<div>
 				<label>
 					<input type="checkbox" name="remember" value="1"> Remember Me

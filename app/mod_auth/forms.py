@@ -11,4 +11,4 @@ class LoginForm(Form):
 class RegisterForm(Form):
 	email = TextField('Email Address', [Email(), Required(message='Please enter a valid email address')])
 	password = PasswordField('Password', [Required(message='Please enter a password')])
-	confirm_password = PasswordField('Confirm Password', [Required(message='Passwords must match')])
+	confirm_password = PasswordField('Confirm Password', [Required(message='Please confirm your password')])

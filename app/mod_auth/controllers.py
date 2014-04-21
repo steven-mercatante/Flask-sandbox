@@ -25,6 +25,21 @@ def login():
 @mod_auth.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegisterForm(request.form)
+	if form.validate_on_submit():
+		username = form.email.data
+		email = form.email.data
+		password = form.password.data
+		confirm_password = form.confirm_password.data
+		if not email or not password:
+			flash('Please provide an email address and password')
+			return redirect(url_for('auth.register'))
+		if password != confirm_password:
+			flash('Passwords must match')
+			return redirect(url_for('auth.register'))
+		if User.query.filter_by(email=email).first():
+			flash('That user account already exists')
+			return redirect(url_for('auth.register'))
+		user = User(username=email, email=email, password=generate_password_hash(password))
+		db.session.add(user)
+		db.session.commit()
 	return render_template('mod_auth/register.html', form=form)
-	# if form.validate_on_submit():
-	# 	user = User(username=form.email.data, email=form.email.data, password=form.password.data)
