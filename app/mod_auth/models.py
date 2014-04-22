@@ -11,9 +11,8 @@ class Base(db.Model):
 	__abstract__ = True
 
 	id = db.Column(db.Integer, primary_key=True)
-	date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-	date_updated = db.Column(db.DateTime, default=db.func.current_timestamp(), 
-		onupdate=db.func.current_timestamp())
+	date_created = db.Column(db.DateTime)
+	date_updated = db.Column(db.DateTime) 
 
 
 class User(Base):
@@ -24,6 +23,7 @@ class User(Base):
 	password = db.Column(db.String(128), nullable=False)
 	role = db.Column(db.SmallInteger, nullable=False, default=ROLE_USER)
 	status = db.Column(db.SmallInteger, nullable=False, default=STATUS_PENDING)
+	is_activated = db.Column(db.SmallInteger, nullable=False, default=0)
 
 	def __init__(self, username, email, password):
 		self.username = username
@@ -31,13 +31,17 @@ class User(Base):
 		self.password = password
 
 	def is_authenticated(self):
-		return True
+		if self.username:
+			return True
+		return False
 
 	def is_active(self):
-		return True
+		return self.is_actived
 
 	def is_anonymous(self):
-		return False
+		if self.username:
+			return False
+		return True
 
 	def get_id(self):
 		return unicode(self.id)
