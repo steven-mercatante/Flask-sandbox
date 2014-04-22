@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Hello, {{ user.username }}<br>
+<ul>
+	<li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+</ul>
+
+{% endblock %}

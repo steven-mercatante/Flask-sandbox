@@ -23,7 +23,7 @@ def before_request():
 @mod_auth.route('/profile')
 @login_required
 def profile():
-	return render_template('mod_auth/home.html', user=g.user)
+	return render_template('mod_auth/profile.html', user=g.user)
 
 @mod_auth.route('/register', methods=['GET', 'POST'])
 def register():
