@@ -42,6 +42,7 @@ def register():
 		user = User(username=email, email=email, password=generate_password_hash(password))
 		db.session.add(user)
 		db.session.commit()
+		login_user(user)
 		return redirect(url_for('auth.profile'))
 	return render_template('mod_auth/register.html', form=form)
 
