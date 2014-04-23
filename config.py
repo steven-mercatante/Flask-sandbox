@@ -19,7 +19,6 @@ DB_HOST = 'localhost'
 
 SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, 
 	DB_HOST, DB_DATABASE)
-SQLALCHEMY_MIGRATE_REPO = os.path.join(BASE_DIR, 'db_repository')
 SQLALCHEMY_ECHO = True
 
 

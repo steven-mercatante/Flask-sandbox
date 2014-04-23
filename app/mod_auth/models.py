@@ -20,6 +20,7 @@ class User(Base):
 
 	username = db.Column(db.String(128), nullable=False)
 	email = db.Column(db.String(128), nullable=False, unique=True)
+	email2 = db.Column(db.String(128), nullable=False, unique=True)
 	password = db.Column(db.String(128), nullable=False)
 	role = db.Column(db.SmallInteger, nullable=False, default=ROLE_USER)
 	status = db.Column(db.SmallInteger, nullable=False, default=STATUS_PENDING)
