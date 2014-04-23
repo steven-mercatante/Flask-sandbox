@@ -20,6 +20,7 @@ def load_user(user_id):
 def before_request():
 	g.user = current_user
 
+@mod_auth.route('/')
 @mod_auth.route('/profile')
 @login_required
 def profile():
@@ -55,10 +56,10 @@ def login():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user and check_password_hash(user.password, form.password.data):
 			session['user_id'] = user.id
+			login_user(user, remember=form.remember_me.data)
 			return redirect(url_for('auth.profile'))
 		else:
 			flash('Incorrect email or password', 'error')
-			return redirect(url_for('auth.login'))
 	return render_template('mod_auth/login.html', form=form)
 
 @mod_auth.route('/logout')

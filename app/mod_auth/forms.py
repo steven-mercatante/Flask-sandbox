@@ -6,6 +6,7 @@ from wtforms.validators import Required, Email, EqualTo, Length
 class LoginForm(Form):
 	email = TextField('Email Address', [Email(), Required(message='Please enter a valid email address')])
 	password = PasswordField('Password', [Required(message='Please enter a password')])
+	remember_me = BooleanField('Remember Me', default=False)
 
 
 class RegisterForm(Form):
