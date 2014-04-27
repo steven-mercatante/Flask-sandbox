@@ -17,6 +17,10 @@ login_manager.login_view = 'auth.login'
 def e_404(error):
 	return render_template('404.html'), 404
 
+@app.errorhandler(500)
+def e_500(error):
+	return render_template('500.html'), 500
+
 # Import a module / component using its blueprint handler variable
 from app.mod_auth.controllers import mod_auth as auth_mod
 
