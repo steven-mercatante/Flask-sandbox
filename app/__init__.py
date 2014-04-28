@@ -13,6 +13,10 @@ login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
 # Handle HTTP errors
+@app.errorhandler(403)
+def e_403(error):
+	return render_template('403.html'), 403
+
 @app.errorhandler(404)
 def e_404(error):
 	return render_template('404.html'), 404
