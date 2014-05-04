@@ -26,7 +26,7 @@ def e_500(error):
 	return render_template('500.html'), 500
 
 # Import a module / component using its blueprint handler variable
-from app.mod_auth.controllers import mod_auth as auth_mod
+from app.mod_auth.views import mod_auth as auth_mod
 
 # Register blueprints
 app.register_blueprint(auth_mod)

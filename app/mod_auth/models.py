@@ -1,4 +1,5 @@
 from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -20,8 +21,7 @@ class User(Base):
 
 	username = db.Column(db.String(128), nullable=False)
 	email = db.Column(db.String(128), nullable=False, unique=True)
-	email2 = db.Column(db.String(128), nullable=False, unique=True)
-	password = db.Column(db.String(128), nullable=False)
+	password_hash = db.Column(db.String(128), nullable=False)
 	role = db.Column(db.SmallInteger, nullable=False, default=ROLE_USER)
 	status = db.Column(db.SmallInteger, nullable=False, default=STATUS_PENDING)
 	is_activated = db.Column(db.SmallInteger, nullable=False, default=0)
@@ -30,6 +30,17 @@ class User(Base):
 		self.username = username
 		self.email = email
 		self.password = password
+
+	@property
+	def password(self):
+		raise AttributeError('password is not a readable attribute')
+
+	@password.setter
+	def password(self, password):
+		self.password_hash = generate_password_hash(password)
+
+	def verify_password(self, password):
+		return check_password_hash(password)
 
 	def is_authenticated(self):
 		if self.username:
