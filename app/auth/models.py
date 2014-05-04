@@ -17,7 +17,7 @@ class Base(db.Model):
 
 
 class User(Base):
-	__tablename__ = 'auth_user'
+	__tablename__ = 'user'
 
 	username = db.Column(db.String(128), nullable=False)
 	email = db.Column(db.String(128), nullable=False, unique=True)

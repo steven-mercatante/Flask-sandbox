@@ -5,12 +5,12 @@ from flask.ext.login import login_user, logout_user, current_user, \
 from werkzeug import check_password_hash, generate_password_hash
 
 from app import app, db, login_manager
-from app.mod_auth.forms import LoginForm, RegisterForm
-from app.mod_auth.models import User
+from app.auth.forms import LoginForm, RegisterForm
+from app.auth.models import User
 
 
 # Define the blueprint
-mod_auth = Blueprint('auth', __name__, url_prefix='/auth')
+auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -20,13 +20,13 @@ def load_user(user_id):
 def before_request():
 	g.user = current_user
 
-@mod_auth.route('/')
-@mod_auth.route('/profile')
+@auth.route('/')
+@auth.route('/profile')
 @login_required
 def profile():
-	return render_template('mod_auth/profile.html', user=g.user)
+	return render_template('auth/profile.html', user=g.user)
 
-@mod_auth.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
 	form = RegisterForm(request.form)
 	if form.validate_on_submit():
@@ -45,9 +45,9 @@ def register():
 		db.session.commit()
 		login_user(user)
 		return redirect(url_for('auth.profile'))
-	return render_template('mod_auth/register.html', form=form)
+	return render_template('auth/register.html', form=form)
 
-@mod_auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated():
 		return redirect(url_for('auth.profile'))
@@ -60,9 +60,9 @@ def login():
 			return redirect(url_for('auth.profile'))
 		else:
 			flash('Incorrect email or password', 'error')
-	return render_template('mod_auth/login.html', form=form)
+	return render_template('auth/login.html', form=form)
 
-@mod_auth.route('/logout')
+@auth.route('/logout')
 def logout():
 	if g.user is None or g.user.is_authenticated() == False:
 		return redirect(url_for('auth.profile'))
