@@ -1,44 +1,16 @@
-{% import 'auth/macros.html' as macros %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% extends 'base.html' %}
+{% block title %}Flasky - Login{% endblock %}
 
-{% block content %}
-<div>
-	<div>
-		<legend>Login</legend>
-		{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-			<ul class="flashes">
-				{% for category, message in messages %}
-				<li class="{{ category }}">{{ message }}<li>
-				{% endfor %}
-			</ul>
-			{% endif %}
-		{% endwith %}
-
-		{% if form.errors %}
-		<ul class="form-errors">
-		{% for field, error in form.errors.items() %}
-			{% for e in error %}
-			<li>{{ e }}</li>
-			{% endfor %}
-		{% endfor %}
-		</ul>
-		{% endif %}
-		
-		<form method="POST" action="">
-			{{ form.csrf_token }}
-			{{ macros.render_field(form.email, placeholder="Your Email Address", autofocus="") }}
-			{{ macros.render_field(form.password, placeholder="Password") }}
-			<div>
-				<label>
-					<input type="checkbox" name="remember" value="1"> Remember Me
-				</label>
-				<a role="button" href="">Forgot your password?</a>
-				<span class="clearfix"></span>
-			</div>
-			<button type="submit" name="submit">Log in</button>
-		</form>
-	</div>
+{% block page_content %}
+<div class="page-header">
+    <h1>Login</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    <br>
+    <p>Forgot your password? <a href="{{ url_for('auth.password_reset_request') }}">Click here to reset it</a>.</p>
+    <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
 </div>
 {% endblock %}
