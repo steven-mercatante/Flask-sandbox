@@ -1,22 +1,19 @@
-from flask import abort, Blueprint, request, render_template, flash, g, \
-	session, redirect, url_for
+from flask import abort, render_template, flash, redirect, session, url_for, \
+	request, g	
 from flask.ext.login import login_user, logout_user, current_user, \
 	login_required
 from werkzeug import check_password_hash, generate_password_hash
 
-from app import app, db, login_manager
-from app.auth.forms import LoginForm, RegisterForm
-from app.auth.models import User
-
-
-# Define the blueprint
-auth = Blueprint('auth', __name__, url_prefix='/auth')
+from . import auth
+from .. import db, login_manager
+from .forms import LoginForm, RegisterForm
+from .models import User
 
 @login_manager.user_loader
 def load_user(user_id):
 	return User.query.get(user_id)
 
-@app.before_request
+@auth.before_request
 def before_request():
 	g.user = current_user
 
@@ -25,6 +22,21 @@ def before_request():
 @login_required
 def profile():
 	return render_template('auth/profile.html', user=g.user)
+
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('auth.profile'))
+	form = LoginForm(request.form)
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if user and check_password_hash(user.password, form.password.data):
+			session['user_id'] = user.id
+			login_user(user, remember=form.remember_me.data)
+			return redirect(url_for('auth.profile'))
+		else:
+			flash('Incorrect email or password', 'error')
+	return render_template('auth/login.html', form=form)
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -46,21 +58,6 @@ def register():
 		login_user(user)
 		return redirect(url_for('auth.profile'))
 	return render_template('auth/register.html', form=form)
-
-@auth.route('/login', methods=['GET', 'POST'])
-def login():
-	if g.user is not None and g.user.is_authenticated():
-		return redirect(url_for('auth.profile'))
-	form = LoginForm(request.form)
-	if form.validate_on_submit():
-		user = User.query.filter_by(email=form.email.data).first()
-		if user and check_password_hash(user.password, form.password.data):
-			session['user_id'] = user.id
-			login_user(user, remember=form.remember_me.data)
-			return redirect(url_for('auth.profile'))
-		else:
-			flash('Incorrect email or password', 'error')
-	return render_template('auth/login.html', form=form)
 
 @auth.route('/logout')
 def logout():

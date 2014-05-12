@@ -19,8 +19,13 @@ def create_app(config_name):
 	login_manager.init_app(app)
 
 	# Register Blueprints
+	# TODO: reduce boilerplate by listing blueprints in a dict and iterating
+	# over them to register them
 	from .main import main as main_blueprint
 	app.register_blueprint(main_blueprint)
+
+	from .auth import auth as auth_blueprint
+	app.register_blueprint(auth_blueprint)
 
 	from .sandbox import sandbox as sandbox_blueprint
 	app.register_blueprint(sandbox_blueprint)
