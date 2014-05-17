@@ -24,10 +24,9 @@ class Base(db.Model):
 	date_updated = db.Column(db.DateTime, default=datetime.utcnow) 
 
 
-class User(Base):
+class User(UserMixin, Base):
 	__tablename__ = 'user'
 
-	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(128), nullable=False)
 	email = db.Column(db.String(128), nullable=False, unique=True)
 	password_hash = db.Column(db.String(128), nullable=False)
@@ -50,7 +49,7 @@ class User(Base):
 		self.password_hash = generate_password_hash(password)
 
 	def verify_password(self, password):
-		return check_password_hash(password)
+		return check_password_hash(self.password_hash, password)
 
 	def generate_confirmation_token(self, expiration=3600):
 		s = Serializer(current_app.config['SECRET_KEY'], expiration)
@@ -115,17 +114,6 @@ class User(Base):
 		if self.username:
 			return True
 		return False
-
-	def is_active(self):
-		return self.is_actived
-
-	def is_anonymous(self):
-		if self.username:
-			return False
-		return True
-
-	def get_id(self):
-		return unicode(self.id)
 
 	def __repr__(self):
 		return '<User %r>' % self.username
