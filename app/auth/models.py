@@ -20,8 +20,8 @@ class Base(db.Model):
 	__abstract__ = True
 
 	id = db.Column(db.Integer, primary_key=True)
-	date_created = db.Column(db.DateTime)
-	date_updated = db.Column(db.DateTime) 
+	date_created = db.Column(db.DateTime, default=datetime.utcnow)
+	date_updated = db.Column(db.DateTime, default=datetime.utcnow) 
 
 
 class User(Base):
