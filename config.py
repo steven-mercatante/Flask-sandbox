@@ -7,10 +7,12 @@ class Config:
 
 	CSRF_ENABLED = True
 
-	DB_USER = 'flask_sandbox'
-	DB_PASSWORD = 'flask_sandbox'
-	DB_DATABASE = 'flask_sandbox'
-	DB_HOST = 'localhost'
+	TITLE = 'Flask Sandbox'
+
+	DB_HOST = os.environ.get('DB_HOST')
+	DB_USER = os.environ.get('DB_USER')
+	DB_PASSWORD = os.environ.get('DB_PASSWORD')
+	DB_DATABASE = os.environ.get('DB_DATABASE')
 	SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, 
 		DB_HOST, DB_DATABASE)
 	SQLALCHEMY_ECHO = True
