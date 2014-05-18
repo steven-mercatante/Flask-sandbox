@@ -16,7 +16,12 @@ class Config:
 	SQLALCHEMY_ECHO = True
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
-	MAIL_SENDER = 'placeholder@test.com'
+	MAIL_SERVER = os.environ.get('MAIL_SERVER')
+	MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+	MAIL_PORT = os.environ.get('MAIL_PORT')
+	MAIL_SENDER = os.environ.get('MAIL_SENDER')
+	MAIL_USE_TLS = True
 
 	@staticmethod
 	def init_app(app):
