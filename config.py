@@ -16,6 +16,8 @@ class Config:
 	SQLALCHEMY_ECHO = True
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
+	MAIL_SENDER = 'placeholder@test.com'
+
 	@staticmethod
 	def init_app(app):
 		pass
