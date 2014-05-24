@@ -42,6 +42,9 @@ def create_app(config_name):
 
 	@app.context_processor
 	def jinja2_helpers():
-		return dict(page_title=view_helpers.page_title)
+		return dict(
+			get_page_title=view_helpers.get_page_title,
+			set_page_title=view_helpers.set_page_title,
+		)
 
 	return app
