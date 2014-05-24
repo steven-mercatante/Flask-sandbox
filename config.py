@@ -1,4 +1,5 @@
 import os
+import logging
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -29,9 +30,17 @@ class Config:
 		'steven.mercatante@gmail.com'
 	]
 
+	LOGGING_FILENAME = 'app/logs/app.log'
+	LOGGING_FORMAT = '%(levelname)-10s %(asctime)-30s [%(name)s:%(filename)s:%(lineno)d] %(message)s'
+	LOGGING_LEVEL = logging.WARNING
+
 	@staticmethod
 	def init_app(app):
-		pass
+		logging.basicConfig(
+			filename=app.config['LOGGING_FILENAME'],
+			format=app.config['LOGGING_FORMAT'],
+			level=app.config['LOGGING_LEVEL']
+		)
 
 
 class DevConfig(Config):
