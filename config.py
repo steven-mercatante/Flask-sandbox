@@ -13,8 +13,8 @@ class Config:
 	DB_USER = os.environ.get('DB_USER')
 	DB_PASSWORD = os.environ.get('DB_PASSWORD')
 	DB_DATABASE = os.environ.get('DB_DATABASE')
-	SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}'.format(DB_USER, DB_PASSWORD, 
-		DB_HOST, DB_DATABASE)
+	SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}'.format(DB_USER, 
+		DB_PASSWORD, DB_HOST, DB_DATABASE)
 	SQLALCHEMY_ECHO = True
 	SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
@@ -24,6 +24,10 @@ class Config:
 	MAIL_PORT = os.environ.get('MAIL_PORT')
 	MAIL_SENDER = os.environ.get('MAIL_SENDER')
 	MAIL_USE_TLS = True
+
+	ADMIN_EMAILS = [
+		'steven.mercatante@gmail.com'
+	]
 
 	@staticmethod
 	def init_app(app):
