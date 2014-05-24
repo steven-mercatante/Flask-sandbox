@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block content %}
+	{% if current_user.is_authenticated() %}
+	<b>You are logged in as {{ current_user.username }}</b><br>
+	{% else %}
+	<b>You are not currently logged in</b><br>
+	{% endif %}
+
   {% block page_content %}{% endblock %}
 {% endblock %}
