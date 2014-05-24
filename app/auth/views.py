@@ -18,6 +18,8 @@ def before_request():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated():
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -87,7 +89,13 @@ def change_password():
             return redirect(url_for('main.index'))
         else:
             flash('Invalid password.')
-    return render_template("auth/change_password.html", form=form)
+    return render_template('auth/change_password.html', form=form)
+
+
+@auth.route('/user')
+@login_required
+def user():
+    return render_template('auth/user.html')
 
 
 @auth.route('/reset', methods=['GET', 'POST'])

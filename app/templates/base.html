@@ -10,7 +10,7 @@
 			<div class="navbar-collapse collapse">
 				{% if current_user.is_authenticated() %}
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">{{ current_user.username }}</a></li>
+					<li><a href="{{ url_for('auth.user') }}">{{ current_user.username }}</a></li>
 					<li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
 				</ul>
 				{% else %}
