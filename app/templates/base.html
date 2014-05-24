@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block head %}
-  {{ super() }}
+	{{ super() }}
 {% endblock %}
 
 {% block content %}
@@ -11,5 +11,12 @@
 	<b>You are not currently logged in</b><br>
 	{% endif %}
 
-  {% block page_content %}{% endblock %}
+	<div class="container">
+		{% for message in get_flashed_messages() %}
+		<div class="alert">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% block page_content %}{% endblock %}
+	</div>
 {% endblock %}
