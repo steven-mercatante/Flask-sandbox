@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-hello user
+
+Username: {{ current_user.username }}<br>
+Email: {{ current_user.email }} (<a href="{{ url_for('auth.change_email_request') }}">change</a>)<br>
+<a href="{{ url_for('auth.change_password') }}">Change Password</a>
+
 {% endblock %}
