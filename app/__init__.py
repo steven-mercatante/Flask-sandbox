@@ -6,6 +6,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 
 from config import config
+from helpers import views as view_helpers
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -38,5 +39,9 @@ def create_app(config_name):
 
 	from .sandbox import sandbox as sandbox_blueprint
 	app.register_blueprint(sandbox_blueprint)
+
+	@app.context_processor
+	def jinja2_helpers():
+		return dict(page_title=view_helpers.page_title)
 
 	return app
