@@ -25,7 +25,7 @@ class Config:
 	MAIL_SENDER = os.environ.get('MAIL_SENDER')
 	MAIL_USE_TLS = True
 
-	ADMIN_EMAILS = [
+	ADMINS = [
 		'steven.mercatante@gmail.com'
 	]
 
