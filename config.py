@@ -4,6 +4,7 @@ import logging
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
+	print 'Config class'
 	SECRET_KEY = os.environ.get('SECRET_KEY') or 'placeholder secret'
 
 	CSRF_ENABLED = True

@@ -6,7 +6,6 @@ from flask.ext.migrate import Migrate, MigrateCommand
 from app import create_app, db
 from app.auth.models import User
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
 if os.path.exists('.env'):
     print('Importing environment from .env...')
@@ -14,6 +13,8 @@ if os.path.exists('.env'):
         var = line.strip().split('=')
         if len(var) == 2:
             os.environ[var[0]] = var[1]
+
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
 manager = Manager(app)
 migrate = Migrate(app, db)
