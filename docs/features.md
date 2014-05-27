@@ -3,3 +3,4 @@
 - App skeleton, including blueprints and environmental configs
 - Database migrations
 - Uses Flask Bootstrap
+- Config based logging
