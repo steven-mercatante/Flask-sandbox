@@ -7,6 +7,7 @@ from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
 
 from app.exceptions import ValidationError
+from .. models import Base
 from .. import db, login_manager
 
 ROLE_USER = 0
@@ -15,13 +16,6 @@ ROLE_ADMIN = 1
 STATUS_PENDING = 0
 STATUS_APPROVED = 1
 STATUS_BANNED = 2
-
-class Base(db.Model):
-	__abstract__ = True
-
-	id = db.Column(db.Integer, primary_key=True)
-	date_created = db.Column(db.DateTime, default=datetime.utcnow)
-	date_updated = db.Column(db.DateTime, default=datetime.utcnow) 
 
 
 class User(UserMixin, Base):
