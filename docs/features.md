@@ -4,3 +4,5 @@
 - Database migrations
 - Uses Flask Bootstrap
 - Config based logging
+- Email 
+- Custom shell commands (manage.py)
