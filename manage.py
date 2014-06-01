@@ -25,11 +25,9 @@ manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 @manager.command
-@manager.option('-h', '--host', default='0.0.0.0')
-@manager.option('-p', '--port', default=5000)
-def devserver(host, port):
+def devserver(host='0.0.0.0', port=5000):
 	port = int(port)
-	app.run(debug=True, host=host, port=port)
+	app.run(host=host, port=port)
 
 if __name__ == '__main__':
 	manager.run()
