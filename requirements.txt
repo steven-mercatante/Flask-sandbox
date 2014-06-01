@@ -8,11 +8,12 @@ Flask-Migrate==1.2.0
 Flask-Moment==0.3.1
 Flask-OpenID==1.2.1
 Flask-SQLAlchemy==1.0
-Flask-Script==0.6.7
+Flask-Script==2.0.5
 Flask-WTF==0.9.5
 Flask-WhooshAlchemy==0.55
 Jinja2==2.7.2
 Mako==0.9.1
+MarkupSafe==0.23
 MySQL-python==1.2.5
 SQLAlchemy==0.9.4
 Tempita==0.5.2

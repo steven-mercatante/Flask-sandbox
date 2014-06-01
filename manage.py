@@ -20,8 +20,16 @@ migrate = Migrate(app, db)
 
 def make_shell_context():
 	return dict(app=app, db=db, User=User)
+
 manager.add_command('shell', Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
+
+@manager.command
+@manager.option('-h', '--host', default='0.0.0.0')
+@manager.option('-p', '--port', default=5000)
+def devserver(host, port):
+	port = int(port)
+	app.run(debug=True, host=host, port=port)
 
 if __name__ == '__main__':
 	manager.run()
