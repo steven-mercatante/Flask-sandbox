@@ -37,9 +37,6 @@ def create_app(config_name):
 	from .auth import auth as auth_blueprint
 	app.register_blueprint(auth_blueprint)
 
-	from .sandbox import sandbox as sandbox_blueprint
-	app.register_blueprint(sandbox_blueprint)
-
 	@app.context_processor
 	def jinja2_helpers():
 		return dict(
