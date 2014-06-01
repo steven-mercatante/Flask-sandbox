@@ -3,6 +3,8 @@ import os
 if os.path.exists('.env'):
     print('Importing environment from .env...')
     for line in open('.env'):
+    	if line.startswith('#'):
+    		continue
         var = line.strip().split('=')
         if len(var) == 2:
             os.environ[var[0]] = var[1]
@@ -26,6 +28,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def devserver(host='0.0.0.0', port=5000):
+	"""Runs a Flask development server"""
 	port = int(port)
 	app.run(host=host, port=port)
 
