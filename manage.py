@@ -1,14 +1,5 @@
 import os
 
-from flask.ext.script import Manager, Shell
-from flask.ext.migrate import Migrate, MigrateCommand
-
-from app import create_app, db
-
-# Import any models that alembic should be aware of for migrations
-from app.auth.models import User
-
-
 if os.path.exists('.env'):
     print('Importing environment from .env...')
     for line in open('.env'):
@@ -16,8 +7,14 @@ if os.path.exists('.env'):
         if len(var) == 2:
             os.environ[var[0]] = var[1]
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+from app import create_app, db
+# Import any models that alembic should be aware of for migrations
+from app.auth.models import User
 
+from flask.ext.script import Manager, Shell
+from flask.ext.migrate import Migrate, MigrateCommand
+
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
