@@ -7,6 +7,5 @@
   with_items:
     - python-dev
     - libmysqlclient-dev
-    # - python-mysqldb # Alternative if `libmysqlclient-dev` doesn't work
     - python-pip
     - python-virtualenv
