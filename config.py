@@ -37,12 +37,7 @@ class Config:
 
 	@staticmethod
 	def init_app(app):
-		logging.basicConfig(
-			filename=app.config['LOGGING_FILENAME'],
-			format=app.config['LOGGING_FORMAT'],
-			level=app.config['LOGGING_LEVEL']
-		)
-
+		pass
 
 class DevConfig(Config):
 	DEBUG = True
