@@ -31,7 +31,7 @@ Working within Vagrant:
 - Login: `vagrant ssh`
 - Change directory to project root: `cd /vagrant`
 - Activate the virtual environment: `source venv/bin/activate`
-Note: the plan is to have the above steps performed automatically upon SSHing into the Vagrant box.
+  Note: the plan is to have the above steps performed automatically upon SSHing into the Vagrant box.
 
 Vagrant notes:
 --------------
@@ -42,7 +42,7 @@ Working with models:
 --------------------
 - Model classes should extend the `Base` model (`app/models.py`). See `app/auth/models.py` for an example.
 - Defining a `__repr__` method is highly recommended for debugging purposes.
-- To enable migration support, import the model within `manage.py`. Ex: `from app.main.models import Person`. Usage of `from app.main.models import *` is discouraged as per "[explicit is better than implicit](http://legacy.python.org/dev/peps/pep-0020/)"
+- To enable migration support, import the model within `manage.py`. Ex: `from app.main.models import Person`. Usage of `from app.main.models import *` is discouraged as per "[explicit is better than implicit](http://legacy.python.org/dev/peps/pep-0020/)".
 - *IMPORTANT: Alembic does a good job building DB migrations, but it isn't perfect. You may see errors in the console when building migrations - don't panic! Just spot check the migration and fix any errors, then run `python manage.py db upgrade`.*
 
 Tips:
