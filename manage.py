@@ -28,7 +28,9 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def devserver(host='0.0.0.0', port=5000):
-	"""Runs a Flask development server"""
+	"""Runs a Flask development server.
+	Usage: devserver -h 127.0.0.1 -p 5050 to change host and/or port
+	"""
 	port = int(port)
 	app.run(host=host, port=port)
 
