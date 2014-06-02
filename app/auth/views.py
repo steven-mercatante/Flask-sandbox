@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, \
+    current_app, abort
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 
@@ -40,6 +41,8 @@ def logout():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    if not current_app.config['AUTH_REGISTRATION_ENABLED']:
+        abort(404)
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(email=form.email.data,

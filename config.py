@@ -30,6 +30,9 @@ class Config:
 		'steven.mercatante@gmail.com'
 	]
 
+	# If set to False, attempting to hit /auth/register will result in a 404
+	AUTH_REGISTRATION_ENABLED = True
+
 	LOGGING_FILENAME = 'app/logs/app.log'
 	LOGGING_FORMAT = '%(levelname)-10s %(asctime)-30s [%(name)s:%(filename)s:%(lineno)d] %(message)s'
 	LOGGING_LEVEL = logging.WARNING
