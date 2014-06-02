@@ -30,8 +30,8 @@ Working within Vagrant:
 -----------------------
 - Login: `vagrant ssh`
 - Change directory to project root: `cd /vagrant`
-- Activate the virtual environment: `source venv/bin/activate`
-  Note: the plan is to have the above steps performed automatically upon SSHing into the Vagrant box.
+- Activate the virtual environment: `source venv/bin/activate`    
+*Note: the plan is to have the above steps performed automatically upon SSHing into the Vagrant box.*
 
 Vagrant notes:
 --------------
@@ -48,4 +48,4 @@ Working with models:
 Tips:
 -----
 - Jump into a project specific Python shell: `python manage.py shell`
-- To work with models within a project shell, you must first add a reference to it in `manage.py`'s `make_shell_context` method.
+- To work with models within a project shell, you must first add a reference to it in `manage.py`'s `make_shell_context()` method.
