@@ -11,6 +11,17 @@ Initial database setup:
 - Create the intial DB migration: `python manage.py db migrate`
 - Run DB migrations: `python manage.py db upgrade`
 
+Connect to Vagrant database from host machine:
+----------------------------------------------
+- MySQL Host: `127.0.0.1`
+- Username: `see configuration setting`
+- Password: `see configuration setting`
+- Port: `3306`
+- SSH Host: `127.0.0.1`
+- SSH User: `vagrant`
+- SSH Key: `~/.vagrant.d/insecure_private_key`
+- SSH Port: `2220`
+
 Common tasks:
 -------------
 - Start a local development server: `python manage.py devserver`
