@@ -3,4 +3,5 @@
   user: vagrant
   roles:
     - webserver
-    - {role: mysql, mysql_db: [{name: stevens_test_db}], mysql_users: [{name: steven, pass: steven, priv: "*.*:ALL"}]}
+    # - {role: mysql, mysql_db: [{name: stevens_test_db}], mysql_users: [{name: steven, pass: steven, priv: "*.*:ALL"}]}
+    - redis
