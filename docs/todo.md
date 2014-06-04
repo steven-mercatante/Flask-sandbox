@@ -1,6 +1,5 @@
 Vagrant:
 --------
-- Install Redis
 - Initialize database by feeding Ansible the `.env` variables
 - Install PostgreSQL
 

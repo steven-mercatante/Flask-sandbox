@@ -7,4 +7,5 @@ Features
 - Uses Flask Bootstrap
 - Config based logging
 - Email 
+- Forms with WTForms
 - Custom shell commands (manage.py)
