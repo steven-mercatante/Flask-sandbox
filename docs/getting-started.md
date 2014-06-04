@@ -45,7 +45,12 @@ Working with models:
 - To enable migration support, import the model within `manage.py`. Ex: `from app.main.models import Person`. Usage of `from app.main.models import *` is discouraged as per "[explicit is better than implicit](http://legacy.python.org/dev/peps/pep-0020/)".
 - *IMPORTANT: Alembic does a good job building DB migrations, but it isn't perfect. You may see errors in the console when building migrations - don't panic! Just spot check the migration and fix any errors, then run `python manage.py db upgrade`.*
 
-Tips:
------
+Caching:
+--------
+- The sandbox uses the [Flask-Cache](https://pythonhosted.org/Flask-Cache/) extension and is configured for Redis. 
+- Caching is as simple as decorating a view with `@cache.cached(timeout=3600)`. See the [docs](https://pythonhosted.org/Flask-Cache/) for more details.
+
+Misc. Tips:
+-----------
 - Jump into a project specific Python shell: `python manage.py shell`
 - To work with models within a project shell, you must first add a reference to it in `manage.py`'s `make_shell_context()` method.
