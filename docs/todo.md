@@ -2,10 +2,12 @@ Vagrant:
 --------
 - Initialize database by feeding Ansible the `.env` variables
 - Install PostgreSQL
+- Install Nginx
+- Install gUnicorn
 
 Python:
 -------
-- Include Redis 
+- Allow selecting DB engine from config. Add support for Postgres. May want to just add support for connection URLs.
 - Enable config based toggle of requiring Users to be confirmed before they can
 log in. This would affect sending registration confirmation emails and checking
 confirmed status during login.
